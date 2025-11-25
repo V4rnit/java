@@ -1,5 +1,4 @@
 import java.util.*;
-
 class TreeNode{
     int val;
     TreeNode left;
@@ -11,19 +10,23 @@ class TreeNode{
         this.right = null;
     }
 }
-public class invert {
-    public static TreeNode invertBinaryTree(TreeNode head){
-        if(head == null){
-            return null;
-        }
-        TreeNode temp = head.left;
-        head.left = head.right;
-        head.right = temp;
-
-        invertBinaryTree(head.left);
-        invertBinaryTree(head.right);
-        return head;
+public class diameter {
+    public static int wrapper(TreeNode root){
+        int [] res = new int[1];
+        height(root, res);
+        return res[0];
     }
+    public static int height(TreeNode root, int [] res){
+        if(root == null){
+            return 0;
+        }
+        int lh = height(root.left, res);
+        int rh = height(root.right, res);
+        
+        res[0] = Math.max(res[0], lh + rh); 
+        return 1 + Math.max(lh, rh);
+    }
+
     public static void bfs(TreeNode root){
         if(root == null){
             return;
@@ -34,6 +37,7 @@ public class invert {
         while(!q.isEmpty()){
             TreeNode curr = q.poll();
             System.out.println(curr.val);
+
             if(curr.left != null){
                 q.add(curr.left);
             }
@@ -42,20 +46,17 @@ public class invert {
             }
         }
     }
-    public static void main(String args[]) {
+    public static void main(String args[]){
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(3);
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
-        root.right.right = new TreeNode(6);
-        root.right.left = new TreeNode(12);
 
-        System.out.println("Before inverting the tree");
-        bfs(root);
+        int d = wrapper(root);
+        System.out.println(d);
 
-        System.out.println("After inverting the tree");
-        invertBinaryTree(root);
+        System.out.println("The level order traversal for this tree is: ");
         bfs(root);
     }
 }
