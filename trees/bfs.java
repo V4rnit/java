@@ -10,7 +10,7 @@ class TreeNode{
         this.right = null;
     }
 }
-public class levelOrderTraversal {
+public class bfs{
     public static void bfs(TreeNode root){
         if(root == null){
             return;
