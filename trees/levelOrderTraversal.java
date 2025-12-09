@@ -16,29 +16,28 @@ class TreeNode {
 public class levelOrderTraversal{
 
     public static List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
+	    List<List<Integer>> res = new ArrayList<>();
 
-        if (root == null) return res;
+	    if(root == null) return res;
 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
+	    Queue<TreeNode> q = new LinkedList<>();
 
-        while (!q.isEmpty()) {
-            int levelSize = q.size();
-            List<Integer> buffer = new ArrayList<>();
+	    q.offer(root);
 
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode curr = q.poll();
-                buffer.add(curr.val);
+	    while(!q.isEmpty()){
+		    int level = q.size();
+		    List<Integer> currList = new ArrayList<>();
 
-                if (curr.left != null) q.offer(curr.left);
-                if (curr.right != null) q.offer(curr.right);
-            }
+		    for(int i = 0; i < level; i++){
+			    TreeNode curr = q.poll();
+			    currList.add(curr.val);
 
-            res.add(buffer);
-        }
-
-        return res;
+			    if(curr.left != null) q.offer(curr.left);
+			    if(curr.right != null) q.offer(curr.right);
+		    }
+		    res.add(currList);
+	    }
+	    return res;
     }
 
     public static void main(String[] args) {
