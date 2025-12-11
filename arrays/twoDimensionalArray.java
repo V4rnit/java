@@ -1,5 +1,5 @@
 import java.util.*;
-class twoDimensionalArrays{
+class twoDimensionalArray{
 	public static int [][] readData(int r, int c){
 		Scanner sc = new Scanner(System.in);
 		int [][] arr = new int [r][c];
