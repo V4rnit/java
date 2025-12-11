@@ -25,7 +25,18 @@ class reverseArray{
 			j--;
 		}
 	}
+	public static void reverseRecursive(int [] arr, int left, int right){
+		if(left >= right){
+			return;
+		}
+		int temp = arr[left];
+		arr[left] = arr[right];
+		arr[right] = temp;
+		
+		reverseRecursive(arr, left + 1, right - 1);
+	}
 	public static void main(String args[]){
+		//Reversing an array using the Brute force approach using an helper array
 		int [] arrBrute = {1,2,3,4,5};
 
 		int [] newArray = reverseBrute(arrBrute);
@@ -33,12 +44,21 @@ class reverseArray{
 			System.out.print(newArray[i] + " ");
 		}
 		System.out.println();
-
+		//Reversing an array using the Two Tracker technique
 		int [] arrOptimal = {9,8,7,6,5,4};
 		reverseOptimal(arrOptimal);
 
 		for(int i = 0; i < arrOptimal.length; i++){
 			System.out.print(arrOptimal[i] + " ");
+		}
+		System.out.println();
+		
+		//Recursively reversing array;
+		int [] arrRecursive = {6,7,8,9};
+		reverseRecursive(arrRecursive,0, arrRecursive.length -1);
+		
+		for(int i = 0; i < arrRecursive.length; i++){
+			System.out.print(arrRecursive[i] + " ");
 		}
 		System.out.println();
 	}
