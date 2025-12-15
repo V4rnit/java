@@ -1,29 +1,22 @@
 import java.util.*;
 
-class Subsets{
-	public static List<List<Integer>> generateSubsets(int [] nums){
-		List<List<Integer>> res = new ArrayList<>();
-
-		backtrack(res, new ArrayList<>(), nums, 0);
-		return res;
-	}
-	public static void backtrack(List<List<Integer>> res, List<Integer> temp, int [] nums, int start){
-		res.add(new ArrayList<>(temp));
-
-		for(int i = start; i < nums.length; i++){
-			//case of adding the element
-			temp.add(nums[i]);
-			//Exploring all paths
-			backtrack(res, temp, nums, i + 1);
-
-			//case of not including a number
-			temp.remove(temp.size() - 1);
+public class Subsets{
+	public static void wrapper(int [] nums, int idx,List<List<Integer>> res,  List<Integer> ds){
+		res.add(new ArrayList<>(ds));
+		for(int i = idx; i < nums.length; i++){
+			ds.add(nums[i]);
+			wrapper(nums, i + 1, res, ds);
+			ds.remove(ds.size() - 1);
 		}
+	}
+	public static List<List<Integer>> allSubsets(int [] nums){
+		List<List<Integer>> ans = new ArrayList<>();
+		wrapper(nums, 0, ans, new ArrayList<>());
+		return ans;
 	}
 	public static void main(String args[]){
 		int [] nums = {1,2,3};
-		List<List<Integer>> subsets = generateSubsets(nums);
 
-		System.out.println(subsets);
+		System.out.println(allSubsets(nums));
 	}
 }
