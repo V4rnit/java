@@ -1,4 +1,8 @@
 package ThemePark;
-public class Restaurant {
-    
+
+interface Restaurant {
+
+    public void displayMenu();
+
+    void displayMenu();
 }
