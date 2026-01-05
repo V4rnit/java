@@ -3,20 +3,19 @@ import java.util.*;
 class Solution{
 	public int evalRPN(String [] tokens){
 		Stack <Integer> s = new Stack<>();
-
 		for(String c : tokens){
-			if(c == "+"){
+			if(c.equals("+")){
 				s.push(s.pop() + s.pop());
 			}
-			else if(c == "-"){
+			else if(c.equals("-")){
 				int a = s.pop();
 				int b = s.pop();
 				s.push(b - a);
 			}
-			else if(c == "*"){
+			else if(c.equals("*")){
 				s.push(s.pop() * s.pop());
 			}
-			else if(c == "/"){
+			else if(c.equals("/")){
 				int a = s.pop();
 				int b = s.pop();
 				s.push(b / a);
