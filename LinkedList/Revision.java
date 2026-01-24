@@ -16,6 +16,15 @@ class ListNode{
 		this.next = next;
 	}
 }
+class Node{
+	public int val;
+	public Node next;
+	public Node random;
+	
+	Node(int val){
+		this.val = val;
+	}
+}
 class Solution{
 	public ListNode mergeTwoLists(ListNode list1, ListNode list2){
 		if(list1 == null && list2 == null){
@@ -71,29 +80,29 @@ class Solution{
 	}
 	public void reorderList(ListNode head){
 		if(head == null){
-			return; 
+			return;
 		}
-		//First need to find middle point of the list
+		//Need to find the middle point of the list first 
 		ListNode slow = head;
 		ListNode fast = head;
 		while(fast != null && fast.next != null){
-			slow = slow.next;
 			fast = fast.next.next;
+			slow = slow.next;
 		}
+		//Now we need to reverse the second half of the list
 		ListNode first = head;
-		ListNode second = slow.next;
+		ListNode second = reverseList(slow.next);
+		//Makind the end node of second to be null
 		slow.next = null;
-		second = reverseList(second);
-		//making the connection
 		while(second != null){
-			ListNode t1 = second.next;
-			ListNode t2 = first.next;
+			ListNode t1 = first.next;
+			ListNode t2 = second.next;
 
 			first.next = second;
-			second.next = t2;
+			second.next = t1;
 
-			first = t2;
-			second = t1;
+			first = t1;
+			second = t2;
 		}
 	}
 	public ListNode reverseList(ListNode head){
@@ -131,22 +140,23 @@ class Solution{
 		}
 		return slow;
 	}
-	public ListNode copyRandomList(ListNode head){
+	public Node copyRandomList(Node head){
 		if(head == null){
-			return null;
+			return head;
 		}
-		HashMap<ListNode, ListNode> map = new HashMap<>();
-		ListNode curr = head;
+		HashMap<Node, Node> map = new HashMap<>();
+		Node curr = head;
 		while(curr != null){
-			map.put(curr, new ListNode(curr.val));
+			map.put(curr, new Node(curr.val));
 			curr = curr.next;
 		}
 		curr = head;
 		while(curr != null){
 			map.get(curr).next = map.get(curr.next);
 			map.get(curr).random = map.get(curr.random);
+			curr = curr.next;
 		}
-		map.get(head);
+		return  map.get(head);
 	}
 	public ListNode removeNthFromEnd(ListNode head, int n){
 		if(head == null){
@@ -182,6 +192,6 @@ class Solution{
 }
 public class Revision{
 	public static void main(String [] args){
-		
+		//Revision Succesfull		
 	}
 }
