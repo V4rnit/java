@@ -1,22 +1,29 @@
 import java.util.*;
-
-public class Subsets{
-	public static void wrapper(int [] nums, int idx,List<List<Integer>> res,  List<Integer> ds){
-		res.add(new ArrayList<>(ds));
+class Solution{
+	public List<List<Integer>> allSubsets(int [] nums, int idx, List<List<Integer>> ans, List<Integer> ds){
+		//because empty array is also a subset
+		ans.add(new ArrayList<>(ds));
 		for(int i = idx; i < nums.length; i++){
 			ds.add(nums[i]);
-			wrapper(nums, i + 1, res, ds);
+			allSubsets(nums, i + 1, ans, ds);
 			ds.remove(ds.size() - 1);
 		}
-	}
-	public static List<List<Integer>> allSubsets(int [] nums){
-		List<List<Integer>> ans = new ArrayList<>();
-		wrapper(nums, 0, ans, new ArrayList<>());
 		return ans;
 	}
-	public static void main(String args[]){
+	public List<List<Integer>> subsets (int [] nums){
+		List<List<Integer>> ans = new ArrayList<>();
+		List<Integer> ds = new ArrayList<>();
+		List <List<Integer>> res = allSubsets(nums, 0, ans, ds);
+		return res;
+	}
+}
+public class Subsets{
+	public static void main(String [] args){
+		Solution sol = new Solution();
 		int [] nums = {1,2,3};
+		
+		List<List<Integer>> res = sol.subsets(nums);
 
-		System.out.println(allSubsets(nums));
+		System.out.println(res);
 	}
 }
