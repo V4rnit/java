@@ -62,13 +62,10 @@ public class NQueenSolver
 
                     }
                 }
-                }
+            }
 
         }
-
         return false;
-       
-        
     }
 
     // Method to check if placing a queen is safe
