@@ -14,19 +14,21 @@ public class MazeSolver {
 
     // Backtracking function to solve the maze
     static boolean solveMazeUtil(int[][] maze, int x, int y, int[][] path) {
-	    //Base case i have found a valid path from a given row and cell
+	    //Base case: if i reach the end of my maze print the path i took and
+	    //call the print path function so i can output the valid path i took
 	    if(x == N - 1 && y == N - 1){
-		printPath(path);
-		return true;
+		    printPath(path);
+		    return true;
 	    }
+	    //Now i want to check that the row & cell i am currently at is a valid one or not 
+	   // And also check that this path has not been already explored
 	    if(x >= 0 && y >= 0 && x < N && y < N && maze[x][y] == 1 && path[x][y] == 0){
-		path[x][y] = 1;
-		if(solveMazeUtil(maze, x + 1, y, path)) return true; //Going down
-		if(solveMazeUtil(maze, x, y + 1, path)) return true; // Going right
-		if(solveMazeUtil(maze, x - 1, y , path)) return true; // Going up
-		if(solveMazeUtil(maze, x, y - 1, path )) return true; //Going left
-
-		path[x][y] = 0;
+		    path[x][y] = 1;
+		    if(solveMazeUtil(maze, x + 1, y, path)) return true; //going down
+		    if(solveMazeUtil(maze, x, y + 1, path)) return true; //going right
+		    if(solveMazeUtil(maze, x - 1, y, path)) return true; //going up
+		    if(solveMazeUtil(maze, x, y - 1, path)) return true; //going left
+		    path[x][y] = 0;
 	    }
 	    return false;
     }
