@@ -19,14 +19,14 @@ class Solution{
 		}
 		int n = board.length;
 		int m = board[0].length;
-		if(row >= 0 && col >= 0 && row < n && col < m && board[row][col] == word.charAt(idx) && visited[row][col] == false ){
+		if(row >= 0 && col >= 0 && row < n && col < m && word.charAt(idx) == board[row][col] && visited[row][col] == false){
 			visited[row][col] = true;
 
 			if(search(board, word, idx + 1, row + 1, col, visited)) return true; //going down
-			if(search(board, word, idx + 1, row , col + 1, visited)) return true; //going right
-			if(search(board, word, idx + 1, row - 1, col, visited)) return true; //going up
-			if(search(board, word, idx + 1, row , col - 1, visited)) return true; //going left
-			
+			if(search(board, word, idx + 1, row, col + 1, visited)) return true; //going right
+			if(search(board, word, idx + 1, row - 1 , col, visited)) return true;//going up
+			if(search(board, word, idx + 1, row, col - 1, visited)) return true;//going left
+
 			visited[row][col] = false;
 		}
 		return false;
