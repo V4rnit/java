@@ -17,8 +17,9 @@ public class MazeSolver {
 	    //Base case: if i reach the end of my maze print the path i took and
 	    //call the print path function so i can output the valid path i took
 	    if(x == N - 1 && y == N - 1){
-		    printPath(path);
-		    return true;
+		path[x][y] = 1;
+		printPath(path);
+		return true;
 	    }
 	    //Now i want to check that the row & cell i am currently at is a valid one or not 
 	   // And also check that this path has not been already explored
