@@ -121,9 +121,57 @@ class Solution{
 		}
 		return res;
 	}
+	public List<Integer> rightSideView(TreeNode root){
+		List<Integer> res = new ArrayList<>();
+		if(root == null){
+			return res;
+		}
+		Queue <TreeNode> q = new LinkedList<>();
+		q.offer(root);
+		while(!q.isEmpty()){
+			int lvl = q.size();
+			for(int i = 0; i < lvl; i++){
+				TreeNode curr = q.poll();
+				if(i == lvl - 1){
+					res.add(curr.val);
+				}
+				if(curr.left != null){
+					q.offer(curr.left);
+				}
+				if(curr.right != null){
+					q.offer(curr.right);
+				}
+			}
+		}
+		return res;
+	}
+	public List<Integer> leftSideView(TreeNode root){
+		List<Integer> res = new ArrayList<>();
+		if(root == null){
+			return res;
+		}
+		Queue <TreeNode> q = new LinkedList<>();
+		q.offer(root);
+		while(!q.isEmpty()){
+			int lvl = q.size();
+			for(int i = 0; i < lvl; i++){
+				TreeNode curr = q.poll();
+				if(i == 0){
+					res.add(curr.val);
+				}
+				if(curr.left != null){
+					q.offer(curr.left);
+				}
+				if(curr.right != null){
+					q.offer(curr.right);
+				}
+			}
+		}
+		return res;
+	}
 }
 
-public class TreeEasyClass {
+public class TreeClass {
     public static void main(String[] args) {
 
         /*
@@ -154,6 +202,14 @@ public class TreeEasyClass {
         // levelOrder
         System.out.println("Level Order Traversal:");
         System.out.println(sol.levelOrder(root));
+
+        // rightSideView
+        System.out.println("Right Side View:");
+        System.out.println(sol.rightSideView(root)); // expected: [1, 3, 5]
+
+        // leftSideView
+        System.out.println("Left Side View:");
+        System.out.println(sol.leftSideView(root)); // expected: [1, 2, 4]
 
         // invertTree
         TreeNode inverted = sol.invertTree(root);
