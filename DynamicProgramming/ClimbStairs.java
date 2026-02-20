@@ -4,6 +4,9 @@
 //N will never be passed as 0 to the function initially
 //Example n = 3
 //Ans = 1 + 1 + 1 | 2 + 1 | 1 + 2 -> total 3 possible ways to reach to the N point in the stairs
+//
+//The reason the Fibonnaci works here is because. Lets assume a point X for that point X we had the sum of last to combos.
+//So for n = 3. for 1 we had -> 1 combo, for n = 2 -> we had 2 combos, for n = 3 -> we should have 3 combos, for n = 4 we have the sum of last to combo
 import java.util.*;
 class Solution{
 	//Solve this using Top - Down (Memoization)
