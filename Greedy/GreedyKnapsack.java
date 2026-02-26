@@ -29,15 +29,17 @@ public class GreedyKnapsack
 		store.sort((item1, item2)-> -item1.getPricePerVal().compareTo(item2.getPricePerVal()));
 		int totalLoot = 0;
 
-		for(ItemValue i : store){
+		for(ItemValue item : store){
 			//Steal the whole item
-			if(capacity - i.weight >= 0)	{
-				totalLoot += i.value;
+			if(capacity - item.weight <= 0){
+				capacity = capacity - item.weight;
+				totalLoot = totalLoot + item.value;
 			}
+			//Cannot steal the whole item steal a fraction of it
 			else{
-				double fraction = (double) capacity / (double) i.weight;
-				totalLoot += fraction * i.value;
-				capacity = 0;
+				double fraction = (double) (capacity) / (double) item.weight;
+				totalLoot += (fraction * item.value);
+				capacity = (int) (capacity - (item.weight * fraction));
 				break;
 			}
 		}
