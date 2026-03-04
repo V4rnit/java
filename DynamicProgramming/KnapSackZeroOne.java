@@ -1,3 +1,4 @@
+import java.util.*;
 class Solution{
 	public int computeRobbery(int [] weights, int [] values, int capacity, int n)	{
 		
@@ -20,7 +21,24 @@ class Solution{
 		}
 		return dp[n][capacity];
 	}
-
+	public int robMemoization(int [] weights, int [] values,int [][] memo, int capacity, int n){
+		if(n == 0 || capacity == 0){
+			return 0;
+		}
+		if(memo[n][capacity] != -1){
+			return memo[n][capacity];
+		}
+		//Take the item
+		if(weights[n - 1] <= capacity){
+			memo[n][capacity] = Math.max(values[n - 1] + robMemoization(weights, values, memo, capacity - weights[n - 1], n - 1), 
+							robMemoization(weights, values, memo, capacity, n - 1));
+		}
+		//Cannot take the item
+		else{
+			memo[n][capacity] = robMemoization(weights, values, memo, capacity, n - 1);
+		}
+		return memo[n][capacity];
+	}
 }
 public class KnapSackZeroOne{
 	public static void main(String [] args){
@@ -28,6 +46,14 @@ public class KnapSackZeroOne{
 		int [] weights = {20, 30, 10};
 		int [] values = {100, 120, 60};
 		
+		int [][] memo = new int[weights.length + 1][51];
+		
+		for(int i = 0; i <= weights.length; i++){
+			Arrays.fill(memo[i], -1);
+		}
 		System.out.println(sol.computeRobbery(weights, values,50 ,values.length));
+		
+		System.out.println(sol.robMemoization(weights, values, memo, 50, values.length));
+		
 	}
 }
